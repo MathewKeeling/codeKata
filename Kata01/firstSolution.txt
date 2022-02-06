@@ -49,9 +49,10 @@ First shower time result: 2022/02/06
 
   Something like:
     Stock Value =
-      ( x/100 * (n/52) * (100 * 2/3) ) + ( 100-x/100 * (100 * 0.65 ))
+      ( x/100 * (n/52) * (100 * 2/3 * $0.65) ) + ( 100-x/100 * (100 * $0.65 ))
 
       Where:
+        Cost of can = $0.65
         N = Number of weeks the discount is in effect
         X = The percentage of sales that take advantage of the sales
 
