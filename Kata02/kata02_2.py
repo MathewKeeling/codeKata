@@ -14,7 +14,7 @@
 
 def chop(low, high, array, x):
     
-    if low <= high:
+    while low <= high:
         mid = (low + high) // 2
 
         if x == array[mid]:
@@ -26,8 +26,8 @@ def chop(low, high, array, x):
         elif x < array[mid]:
             return chop(low, mid - 1, array, x)
 
-    else:
-        return -1
+    
+    return -1
 
 
 
