@@ -12,7 +12,6 @@
 #  attempt one
 
 from array import array
-from math import floor
 
 
 def chop(int, array):
@@ -35,8 +34,8 @@ def chop(int, array):
     return -1
 
 
-array_of_ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 42]
+array_of_ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 42, 99]
 
-result = chop(6, array_of_ints)
+result = chop(42, array_of_ints)
 
 print(result)
