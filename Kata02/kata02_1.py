@@ -16,16 +16,27 @@ from math import floor
 
 
 def chop(int, array):
-    length = len(array)
-    low = array[0]
-    mid = array[floor(length/2)]
-    high = array[-1]
+    low = 0
+    high = len(array) -1
+    mid = 0
 
-    
+    while low <= high: 
+        mid = (high + low) // 2
 
-
+        if array[mid] < int:
+            low = mid + 1
+        
+        elif array[mid] > int:
+            high = mid -1
+        
+        else:
+            return mid
+        
+    return -1
 
 
 array_of_ints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 42]
 
-chop(66, array_of_ints)
+result = chop(6, array_of_ints)
+
+print(result)
