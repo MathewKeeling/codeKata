@@ -1,0 +1,24 @@
+Probabilistic Data Structures:
+
+Source(s):
+https://stackoverflow.com/questions/27307169/what-are-probabilistic-data-structures
+https://en.wikipedia.org/wiki/Category:Probabilistic_data_structures
+
+
+Probabilistic data structures can't give you a definite answer, instead they provide you with a reasonable approximation of the answer and a way to approximate this estimation. They are extremely useful for big data and streaming application because they allow to dramatically decrease the amount of memory needed (in comparison to data structures that give you exact answers).
+
+In majority of the cases these data structures use hash functions to randomize the items. Because they ignore collisions they keep the size constant, but this is also a reason why they can't give you exact values. The advantages they bring:
+
+    they use small amount of memory (you can control how much)
+    they can be easily parallelizable (hashes are independent)
+    they have constant query time (not even amortized constant like in dictionary)
+
+Frequently used probabilistic data structures are:
+    bloom filters
+    ttps://stackoverflow.com/questions/4282375/what-is-the-advantage-to-using-bloom-filters/35007234#35007234
+
+    count-min sketch
+    https://stackoverflow.com/questions/6811351/explaining-the-count-sketch-algorithm/35356116#35356116
+
+    hyperLogLog
+    https://stackoverflow.com/questions/12327004/how-does-the-hyperloglog-algorithm-work/35219704#35219704 
