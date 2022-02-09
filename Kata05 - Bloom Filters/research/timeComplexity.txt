@@ -1,0 +1,24 @@
+Time Complexity:
+
+Source:
+https://www.youtube.com/watch?v=gHzZZYJENpo
+
+O(1) vs O(n)
+
+Constant Time vs Linear Time
+
+Big O of N, or Linear time O(n)
+n refers to the numbe rof items in your list, and your algorithm function scales
+    with the number of elements in your array
+
+O(1), Dictionary, or Hashmap, Constant Time (big O of 1, or Constant Time)
+    Dictionary: large mapping of key:value pairs
+
+Dictionaries / Hashmaps
+    A bunch of keys need to be mapped to certain buckets.
+    The mapping occurs through something called a hash functino.
+    The keys for our specific characters (strings) maps to a value of 1
+    Constant time b/c doesn't matter how big the data structure is:
+        The lookup time is always going to be constant, because no matter  
+        what you supply, it's going to use its function to find a particular
+        place in memory to look for the data being searched for.
