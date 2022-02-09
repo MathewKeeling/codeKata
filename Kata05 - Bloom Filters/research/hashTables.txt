@@ -1,7 +1,26 @@
 Hash Tables:
 
-Source:
+[0] Source:
 https://brilliant.org/wiki/hash-tables/ 
 
-Video:
+[1] Video:
 https://www.youtube.com/watch?v=shs0KM3wKv8 
+
+[2] Source:
+Learning Python, by Mark Lutz 4th Edition
+Pag. 208
+
+[3] Source:
+Problem solving with Alforithms and Data Structurs by Miller, Ranum
+Pag. 194
+
+[4] Source:
+Introduction to Computation and Programming using Python by Guttag
+69, 137-140
+
+[5] Source:
+Introduction to Algorithms 2E by Cormen, Leiserson, et. al.
+Page 220 - ...
+
+Notes
+[2]
