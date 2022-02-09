@@ -12,6 +12,14 @@ def sortWords(toBeSorted):
 
 # /trash
 
+#   get all the words
+#   sort all words by characters
+#       apply all sorted words to a dictionary where the sorted word is the key
+#       and the word itself is appended to the key value
+#   provide a word
+#   sort the word
+#   return the key value(s) for the word
+
 
 def getWords(wordlist):
     file = open(wordlist, "r")
@@ -28,14 +36,13 @@ def get_anagrams(words):
     return d
 
 
-def print_anagrams(words):
-    d = get_anagrams(wordlist)
-    for key, anagrams in d.items():
-        if len(anagrams) > 1:
-            print(key, anagrams)
-
 wordlist = getWords("./resources/wordlist.txt")
+anagramsDict = get_anagrams(wordlist)
 
+# print(anagramsDict)
+
+searchTerm = "".join(sorted("potato"))
+print(anagramsDict[searchTerm])
 
 
 
