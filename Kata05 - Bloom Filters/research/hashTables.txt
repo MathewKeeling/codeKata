@@ -22,6 +22,10 @@ Introduction to Computation and Programming using Python by Guttag
 Introduction to Algorithms 2E by Cormen, Leiserson, et. al.
 Page 220 - ...
 
+[1]
+    A bit over my head on first viewing. Hadn't consulted any reference material first.
+        Maybe try watching it later again after reviewing the relevant literature.
+
 Notes
 [2]
     Lists
@@ -39,3 +43,6 @@ Notes
             created. They appear in the order that they are stored in memory.
         This is intentional. It is much faster to retrieve a value using a dictionary
             key value pair than trees or iteratively searching through a list.
+
+[5]
+    
