@@ -24,3 +24,18 @@ Page 220 - ...
 
 Notes
 [2]
+    Lists
+        ...are objects that contain objects capable of arbitrary nesting
+        They are accessed by index value left to right. 
+            list[i][j]
+
+
+    Dictionaries
+        ...are like listed, but you don't reference values by index number
+            You access them by defining the key. 
+                >>> dictionary[key] --> returns the value associated with the 
+                supplied key.
+        Unlike lists, dictionaries are not stored in the order they are initially
+            created. They appear in the order that they are stored in memory.
+        This is intentional. It is much faster to retrieve a value using a dictionary
+            key value pair than trees or iteratively searching through a list.

@@ -11,3 +11,46 @@
 
 #  it would be cool to implement some sort of grafana thing where the data is graphed
 #    sort of like the way that one commenter did...
+
+import hashlib
+import os
+
+
+def getData(dictionary):
+    dictionaryWords = []
+    f = open(dictionary, "r")
+    file_contents = f.read()
+    dictionaryWords = file_contents.splitlines()
+    print("Import completed.\n")
+    return dictionaryWords
+
+def getHash(array):
+    for c in array:
+        hash = hashlib.md5(c.encode('utf-8')).hexdigest()
+        hash = hash[0:hashReduction]
+        hashTable[hash] = c
+        # hashTable[hashlib.md5(c.encode('utf-8')).hexdigest()] = c
+
+
+hashReduction = 10
+
+dictionary = getData("wordlist.txt")
+hashTable = {}
+
+getHash(dictionary)
+
+
+#  check to see if the word is present
+print("Lenth of Dictionary: " + str(len(dictionary)))
+print("Length of Bloom Filter: " + str(len(hashTable)))
+print("Number of collisions: " + str(len(dictionary) - len(hashTable)))
+
+word = input("Please supply a word: ")
+hashedWord = hashlib.md5(word.encode('utf-8')).hexdigest()
+hashedWord = hashedWord[0:hashReduction]
+
+if hashedWord in hashTable:
+    print(word + " is a correctly spelled word.")
+elif hashedWord not in hashTable:
+    print(word + " is not a correctly spelled word.")
+
