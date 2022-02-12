@@ -42,13 +42,14 @@ def getWordComposition(word):
     return compound
     
 
-words = sorted(getData(".\\resources\wordlist.txt"))
+words = sorted(getData(".\\resources\wordlist20k.txt"))
 sixLetterWords = getWordsExactLength(words, 6)
 fiveOrLessLetterWords = getWordsOfMaxLength(words, 5)
 
 
 testWord = "sixteen"
 test = getWordComposition(testWord)
+
 sixLetterWordsCompositions = {}
 sixLetterWordsCompositions[testWord] = getWordComposition(testWord)
 
