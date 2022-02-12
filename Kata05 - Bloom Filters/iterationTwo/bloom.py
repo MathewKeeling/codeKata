@@ -11,42 +11,59 @@
 
 #  attempt 2
 
-from hashlib import md5, sha1
+from hashlib import md5, sha1, sha256
 from imghdr import tests
 
 def getData(dictionary):
     dictionaryWords = sorted(open(dictionary, "r").read().splitlines())
-    print("Import completed.\n")
     return dictionaryWords
 
 def getMd5Hash(word):
     return int(md5(word.encode()).hexdigest(), 16)
 
 def getSha1Hash(word):
-    return int(sha1(word.ecnode()).hexdigest(), 16)
+    return int(sha1(word.encode()).hexdigest(), 16)
 
-def populateBitVector(array):
-    bitValue = getMd5Hash(array) % len(dictionary)
-    return bitValue
-    
+def getSha256Hash(word):
+    return int(sha256(word.encode()).hexdigest(), 16)
+
+
+
         
 # dictionary = getData("./iterationTwo/wordlist20k.txt")
-dictionary = getData("./iterationTwo/wordlist26.txt")
-bit_vector = [0] * len(dictionary)
+dictionary = getData("./iterationTwo/wordlist20k.txt")
+bit_vector_length = len(dictionary) * 2
+bit_vector = [0] * bit_vector_length
+
 
 
 for word in dictionary:
-    bit_vector[getMd5Hash(word) % len(dictionary)] = 1
+    bit_vector[getMd5Hash(word) % bit_vector_length] = 1
+    bit_vector[getSha1Hash(word) % bit_vector_length] = 1 
 
 # print(bit_vector)
 
-testString = "ejehf"
-if bit_vector[(getMd5Hash(testString) % len(dictionary))] == 1:
-    print(testString, "is present in dictionary")
-if bit_vector[(getMd5Hash(testString) % len(dictionary))] != 1:
-    print(testString, "is not present in dictionary")
+testString = "edgezz"
+if bit_vector[getMd5Hash(testString) % bit_vector_length] == 1:
+    if bit_vector[getSha1Hash(testString) % bit_vector_length] == 1:
+        if bit_vector[getSha256Hash(testString) % bit_vector_length] == 1:
+            print("3 hash test:", testString, "is present in dictionary")
+        else:
+            print("3 hash test:", testString, "is not present in dictionary")
+    else:
+        print("3 hash test:", testString, "is not present in dictionary")
+else:
+    print("3 hash test:", testString, "is not present in dictionary")
 
-print(bit_vector)
+
+
+
+
+if bit_vector[getMd5Hash(testString) % bit_vector_length] == 1:
+    print("1 hash test:", testString, "is present in dictionary")
+elif bit_vector[getMd5Hash(testString) % bit_vector_length] == 0:
+    print("1 hash test:", testString, "is not present in dictionary")
+
 
 
 

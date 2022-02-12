@@ -9,3 +9,11 @@ Working through http://codekata.com/blog/archives/
 
 #### Note 2022/02/12
 * I'm revisiting this to give it another go using a bitmap
+
+#### Note 2022/02/12
+What is clear is:
+
+The bigger the bit_vector / bitmap, the less likely you are to receive false positives.
+The more hashes against which you test, the less likely you are to receive false positives.
+
+Should implement a method to test against an iterative completely accurate method to generate a likelihood of false positivity against one factor, the other, and both.
