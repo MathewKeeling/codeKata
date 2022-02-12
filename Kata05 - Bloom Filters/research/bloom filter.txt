@@ -1,2 +1,8 @@
+
+
 Source:
 https://brilliant.org/wiki/bloom-filter/https://brilliant.org/wiki/bloom-filter/
+
+
+Helpful video:
+https://www.youtube.com/watch?v=U8Ni1yJ8ZS4 
