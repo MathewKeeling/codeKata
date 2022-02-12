@@ -41,19 +41,14 @@ words = getData(".\\resources\wordlist.txt")
 sixLetterWords = getWordsOfLength(words, 6)
 fiveOrLessLetterWords = getWordsOfLength(words, 5)
 
-#print("The Last Ten Six Letter Words: ")
-#print(sixLetterWords[-10:])
-#print("The Last Ten Five Or Less Letter Words: ")
-#print(fiveOrLessLetterWords[-10:])
-
-print("Proof of concept:")
 testWord = "sixteen"
 test = getWordComposition(testWord)
-print(testWord, "is comprised of: ", test)
-
 sixLetterWordsCompositions = {}
+sixLetterWordsCompositions[testWord] = getWordComposition(testWord)
 
+print("The word is: ", testWord)
+print(sixLetterWordsCompositions[testWord])
 
 for word in sixLetterWords:
     sixLetterWordsCompositions[word] = getWordComposition(word)
-    print(sixLetterWordsCompositions[word])
+
