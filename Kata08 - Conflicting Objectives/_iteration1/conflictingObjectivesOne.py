@@ -42,7 +42,7 @@ def getWordComposition(word):
     return compound
     
 
-words = sorted(getData(".\\resources\wordlist20k.txt"))
+words = sorted(getData(".\\resources\wordlist.txt"))
 sixLetterWords = getWordsExactLength(words, 6)
 fiveOrLessLetterWords = getWordsOfMaxLength(words, 5)
 
@@ -55,14 +55,16 @@ sixLetterWordsCompositions[testWord] = getWordComposition(testWord)
 print("The word is: ", testWord)
 print(sixLetterWordsCompositions[testWord])
 
-print(sixLetterWords)
+y = 0
 
 for word in sixLetterWords:
     
     sixLetterWordsCompositions[word] = getWordComposition(word)
+    y = y + 1
     if sixLetterWordsCompositions[word] == []:
         pass
     else:
-        print(word)
-        print(sixLetterWordsCompositions[word])
+        if y % 100 == 0:
+            print(word)
+            print(sixLetterWordsCompositions[word])
 
