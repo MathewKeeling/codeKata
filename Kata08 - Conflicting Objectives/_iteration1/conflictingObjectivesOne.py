@@ -19,6 +19,13 @@ def getWordsOfLength(words, length):
                 wordsOfLength.append(word)
     return wordsOfLength
 
+def getWordsExactLength(words, length):
+    wordsExactLength = []
+    for word in words:
+        if len(word) == length:
+            wordsExactLength.append(word)
+    return wordsExactLength
+
 def getWordComposition(word):
     x = 0
     compound = []
@@ -37,9 +44,10 @@ def getWordComposition(word):
         
         
 
-words = getData(".\\resources\wordlist.txt")
-sixLetterWords = getWordsOfLength(words, 6)
+words = getData(".\\resources\wordlist20k.txt")
+sixLetterWords = getWordsExactLength(words, 6)
 fiveOrLessLetterWords = getWordsOfLength(words, 5)
+
 
 testWord = "sixteen"
 test = getWordComposition(testWord)
@@ -51,4 +59,6 @@ print(sixLetterWordsCompositions[testWord])
 
 for word in sixLetterWords:
     sixLetterWordsCompositions[word] = getWordComposition(word)
+    print(word)
+    print(sixLetterWordsCompositions[word])
 
