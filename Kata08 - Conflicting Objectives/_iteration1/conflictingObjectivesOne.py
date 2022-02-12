@@ -11,7 +11,7 @@ def getData(dictionary):
     print("Import completed.\n")
     return dictionaryWords
 
-def getWordsOfLength(words, length):
+def getWordsOfMaxLength(words, length):
     wordsOfLength = []
     for word in words:
         if len(word) >= 2:
@@ -41,12 +41,10 @@ def getWordComposition(word):
             x = x + 1
     return compound
     
-        
-        
 
-words = getData(".\\resources\wordlist20k.txt")
+words = sorted(getData(".\\resources\wordlist20k.txt"))
 sixLetterWords = getWordsExactLength(words, 6)
-fiveOrLessLetterWords = getWordsOfLength(words, 5)
+fiveOrLessLetterWords = getWordsOfMaxLength(words, 5)
 
 
 testWord = "sixteen"
@@ -57,8 +55,14 @@ sixLetterWordsCompositions[testWord] = getWordComposition(testWord)
 print("The word is: ", testWord)
 print(sixLetterWordsCompositions[testWord])
 
+print(sixLetterWords)
+
 for word in sixLetterWords:
+    
     sixLetterWordsCompositions[word] = getWordComposition(word)
-    print(word)
-    print(sixLetterWordsCompositions[word])
+    if sixLetterWordsCompositions[word] == []:
+        pass
+    else:
+        print(word)
+        print(sixLetterWordsCompositions[word])
 
