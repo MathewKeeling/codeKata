@@ -24,8 +24,6 @@ def getMd5Hash(word):
 def getSha1Hash(word):
     return int(sha1(word.encode()).hexdigest(), 16)
 
-def getSha256Hash(word):
-    return int(sha256(word.encode()).hexdigest(), 16)
 
 
 
@@ -43,17 +41,14 @@ for word in dictionary:
 
 # print(bit_vector)
 
-testString = "edgezz"
+testString = "stupid"
 if bit_vector[getMd5Hash(testString) % bit_vector_length] == 1:
     if bit_vector[getSha1Hash(testString) % bit_vector_length] == 1:
-        if bit_vector[getSha256Hash(testString) % bit_vector_length] == 1:
-            print("3 hash test:", testString, "is present in dictionary")
-        else:
-            print("3 hash test:", testString, "is not present in dictionary")
+        print("2 hash test:", testString, "is present in dictionary")
     else:
-        print("3 hash test:", testString, "is not present in dictionary")
+        print("2 hash test:", testString, "is not present in dictionary")
 else:
-    print("3 hash test:", testString, "is not present in dictionary")
+    print("2 hash test:", testString, "is not present in dictionary")
 
 
 
