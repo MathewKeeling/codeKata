@@ -18,6 +18,7 @@
 
 #
 #  Result of test:
+#    ---Scramble Test--- 4.3 seconds
 #    Words:  20000
 #    Bit_Vector Length: N/A
 #    Size of Dictionary Array:  0.58992 Megabytes
@@ -25,66 +26,49 @@
 #    False Positives Percent:  0.0
 
 #  Tough to figure out what to make of this. Dictionary array is smaller in size..
-#    and the false positivity rate is zero.
+#    and the false positivity rate is zero. It's also 2 seconds faster.
 #    is this a better design? Or have I implemented something that is not a bloom
-#      filter
+#      filter?
 
 #  I have learned a lot since I last worked on this... so I am going to refactor
 #    hoping that will provide greater clarity
 
+#  PROBLEM SOLVED... after an hour or two (3) of sleuthing
+#  I've discovered the problem. I've been using lists for my bitmap...
+#    lists are a horribly space inefficient way to store 100s of 1000s of 0s and 1s
+#    .... i've learned so much--I guess that's cool.
+#    with lists as a bitmap, I erased all of the RAM savings over what I'm doing here
 
+#  Basically: what is below is FASTER than a sequential lookup, becuase it is 
+#    using a hashmap.
+#  But: It is significantly larger than a bitmap bloom filter
+#  While this has 100% accuracy, it has to store 589kB of data in RAM.
+#  The Bloom Filter has 97% accuracy and only has to store 25kB of data in RAM
+#    That is 1/20 the amount of storage in RAM.
+#    Depending on need for accuracy, it can be 100s of time smaller
 
 import hashlib
 from random import shuffle
-from hashlib import md5, sha1, sha256
 import sys
 
-
 def getData(dictionary):
-    dictionaryWords = []
-    f = open(dictionary, "r")
-    file_contents = f.read()
-    dictionaryWords = file_contents.splitlines()
-    print("Import completed.\n")
+    dictionaryWords = sorted(open(dictionary, "r").read().splitlines())
     return dictionaryWords
-
 def getHash(array):
     for c in array:
         hash = hashlib.md5(c.encode('utf-8')).hexdigest()
-        hash = hash[0:hashReduction]
         hashTable[hash] = c
-
 def shuffle_word(word):
     word = list(word)
     shuffle(word)
     return ''.join(word)
 
-
-hashReduction = None
-dictionary = getData("./iterationTwo/wordlist20k.txt")
 hashTable = {}
-
+dictionary = getData("./iterationTwo/wordlist20k.txt")
 getHash(dictionary)
 
-
-#  check to see if the word is present
-print("Lenth of Dictionary: " + str(len(dictionary)))
-print("Length of Bloom Filter: " + str(len(hashTable)))
-print("Number of collisions: " + str(len(dictionary) - len(hashTable)))
-
-word = input("Please supply a word: ")
-hashedWord = hashlib.md5(word.encode('utf-8')).hexdigest()
-hashedWord = hashedWord[0:hashReduction]
-
-if hashedWord in hashTable:
-    print(word + " is a correctly spelled word.")
-elif hashedWord not in hashTable:
-    print(word + " is not a correctly spelled word.")
-
-
-
 falsePositive = 0
-
+realWord = 0
 for word in dictionary:
     word = shuffle_word(word)
     if word not in dictionary:
@@ -93,12 +77,15 @@ for word in dictionary:
         else:
             pass
     else:
-        pass
+        if word in dictionary:
+            realWord = realWord + 1
 
-
+print("---scramble test---")
 print("Words: ", len(dictionary))
 print("Bit_Vector Length: N/A",)
 print("Size of Dictionary Array: ", (sys.getsizeof(hashTable) / 1000000) ,"Megabytes")
 print("False Positives: ", falsePositive)
 print("False Positives Percent: ", ((falsePositive / len(dictionary) * 100) ))
+print("Real Words Count: ", realWord)
+
 
