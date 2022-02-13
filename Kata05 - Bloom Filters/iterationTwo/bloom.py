@@ -11,8 +11,37 @@
 
 #  attempt 2
 
+#---Scramble Test---
+#Words:  20000
+#Bit_Vector Length:  20000 (1x)
+#False Positives:  13891
+#False Positives Percent:  69.455
+
+#---Scramble Test---
+#Words:  20000
+#Bit_Vector Length:  40000 (2x)
+#False Positives:  7430
+#False Positives Percent:  37.15
+
+#---Scramble Test---
+#Words:  20000
+#Bit_Vector Length:  60000 (3x)
+#False Positives:  4453
+#False Positives Percent:  22.264999999999997
+
+#---Scramble Test---
+#Words:  20000
+#Bit_Vector Length:  240000 (12x)
+#Size of Bit_Vector: 1.920056 Megabytes
+#False Positives:  420
+#False Positives Percent:  2.1
+
+
+from email.policy import default
+from random import shuffle
 from hashlib import md5, sha1, sha256
-from imghdr import tests
+import sys
+
 
 def getData(dictionary):
     dictionaryWords = sorted(open(dictionary, "r").read().splitlines())
@@ -24,40 +53,70 @@ def getMd5Hash(word):
 def getSha1Hash(word):
     return int(sha1(word.encode()).hexdigest(), 16)
 
-
+def shuffle_word(word):
+    word = list(word)
+    shuffle(word)
+    return ''.join(word)
 
 
         
 # dictionary = getData("./iterationTwo/wordlist20k.txt")
 dictionary = getData("./iterationTwo/wordlist20k.txt")
-bit_vector_length = len(dictionary) * 2
+bit_vector_length = len(dictionary) * 12
 bit_vector = [0] * bit_vector_length
 
-
-
+#  populate bitmap
 for word in dictionary:
     bit_vector[getMd5Hash(word) % bit_vector_length] = 1
     bit_vector[getSha1Hash(word) % bit_vector_length] = 1 
 
-# print(bit_vector)
 
-testString = "stupid"
-if bit_vector[getMd5Hash(testString) % bit_vector_length] == 1:
-    if bit_vector[getSha1Hash(testString) % bit_vector_length] == 1:
-        print("2 hash test:", testString, "is present in dictionary")
+#  test for false negatives
+trueWords = 0
+falseNegative = 0
+testString = "strange"
+
+for word in dictionary:
+    if word in dictionary:
+        if bit_vector[getMd5Hash(word) % bit_vector_length] == 1:
+            if bit_vector[getSha1Hash(word) % bit_vector_length] == 1:
+                trueWords = trueWords + 1
+            else:
+                falseNegative = falseNegative + 1
+        else:
+            falseNegative = falseNegative + 1
     else:
-        print("2 hash test:", testString, "is not present in dictionary")
-else:
-    print("2 hash test:", testString, "is not present in dictionary")
+        pass
+
+print("True words: ", trueWords)
+print("falseNegatives: ", falseNegative)
+print("Words passed: ", trueWords)
+
+print("\n---Scramble Test---")
 
 
+falsePositive = 0
+
+for word in dictionary:
+    word = shuffle_word(word)
+    if word not in dictionary:
+        if bit_vector[getMd5Hash(word) % bit_vector_length] == 1:
+            if bit_vector[getSha1Hash(word) % bit_vector_length] == 1:
+                falsePositive = falsePositive + 1
+            else:
+                pass
+        else:
+            pass
+    else:
+        pass
 
 
+print("Words: ", len(dictionary))
+print("Bit_Vector Length: ", bit_vector_length)
+print("Size of Bit_Vector:", (sys.getsizeof(bit_vector) / 1000000) ,"Megabytes")
+print("False Positives: ", falsePositive)
+print("False Positives Percent: ", ((falsePositive / len(dictionary) * 100) ))
 
-if bit_vector[getMd5Hash(testString) % bit_vector_length] == 1:
-    print("1 hash test:", testString, "is present in dictionary")
-elif bit_vector[getMd5Hash(testString) % bit_vector_length] == 0:
-    print("1 hash test:", testString, "is not present in dictionary")
 
 
 
