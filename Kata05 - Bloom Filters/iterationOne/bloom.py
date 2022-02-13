@@ -16,24 +16,22 @@
 #  This will be the very worst case, because not only is the word itself stored...
 #    but also the hash is stored.
 
-#  after running a test, I am now convinced that I am not sure what this 
-#    program is even doing. The array containing the hashes and words is smaller
-#    in size than even the bitvector of 12x dictionary length of iterationTwo
-#    something is wrong... need to do more digging
-#
-#  if this were a pure "does x = x?" while x is stored in memory, the false positive
-#    rate would not be as high as it is:
 #
 #  Result of test:
 #    Words:  20000
 #    Bit_Vector Length: N/A
-#    Size of Dictionary Array:  0.000232 Megabytes
-#    False Positives:  18657
-#    False Positives Percent:  93.285
-#
-#  ...It's tough to tell for my ignorance.
-#    but I am guessing that in its current implementation it is actually working
-#      as a bloom filter
+#    Size of Dictionary Array:  0.58992 Megabytes
+#    False Positives:  0
+#    False Positives Percent:  0.0
+
+#  Tough to figure out what to make of this. Dictionary array is smaller in size..
+#    and the false positivity rate is zero.
+#    is this a better design? Or have I implemented something that is not a bloom
+#      filter
+
+#  I have learned a lot since I last worked on this... so I am going to refactor
+#    hoping that will provide greater clarity
+
 
 
 import hashlib
@@ -62,7 +60,7 @@ def shuffle_word(word):
     return ''.join(word)
 
 
-hashReduction = 0
+hashReduction = None
 dictionary = getData("./iterationTwo/wordlist20k.txt")
 hashTable = {}
 
@@ -90,7 +88,7 @@ falsePositive = 0
 for word in dictionary:
     word = shuffle_word(word)
     if word not in dictionary:
-        if hashedWord in hashTable:
+        if hashlib.md5(word.encode('utf-8')).hexdigest() in hashTable:
             falsePositive = falsePositive + 1
         else:
             pass
