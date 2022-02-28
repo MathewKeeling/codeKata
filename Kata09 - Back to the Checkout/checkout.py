@@ -1,7 +1,10 @@
+#  information about classes and objects in Python
+#  https://openbookproject.net/thinkcs/python/english3e/classes_and_objects_I.html
+
+
 class Product:
-    def __init__(self, name, amount, price, discQty, discAmt):
+    def __init__(self, name, price, discQty, discAmt):
         self.name = name
-        self.amount = amount
         self.price = price
 
     def get_price(self, name, number_to_be_bought):
@@ -11,8 +14,14 @@ class Product:
         cost = cost + discount
         return cost
 
-    def make_Product(self, quantity):
-        self.amount -= quantity
+def checkout(goods):
+    total = 0
+    #  split characters
+    #  sum the total of the various elements
+    #  for each element
+    #    instantiate object of Product class and get_price the quantity
+    #  total = sum total of prices
+    return total
 
 products = {
   "a": [50, 3, -20],
@@ -28,20 +37,12 @@ products = {
 productSelected = "c"
 
 name = productSelected
-amount = 200
 price = products[productSelected][0]
 discQty = products[productSelected][1]
 discAmt = products[productSelected][2]
 
-a = Product(name, amount, price, discQty, discAmt)
+a = Product(name, price, discQty, discAmt)
 
 # quantity = int(input('digit amount of items to buy'))
-q1 = 4
-
+q1 = 16
 print(f'cost for {q1} * {a.name} = {a.get_price(a.name, q1)}')
-a.make_Product(q1)
-print(f'remaining stock: {a.amount}\n')
-
-print("Debug: Name: ", a.name)
-
-print(16 % 18)
