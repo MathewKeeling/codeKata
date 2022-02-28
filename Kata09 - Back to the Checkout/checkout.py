@@ -1,11 +1,12 @@
 #  information about classes and objects in Python
 #  https://openbookproject.net/thinkcs/python/english3e/classes_and_objects_I.html
 
-
 class Product:
     def __init__(self, name, price, discQty, discAmt):
         self.name = name
         self.price = price
+        self.discQty = discQty
+        self.discAmt = discAmt
 
     def get_price(self, name, number_to_be_bought):
         cost, discount = 0, 0
@@ -34,7 +35,7 @@ products = {
 # amount = int(input('digit amount of items'))
 # price = int(input('digit price of items'))
 
-productSelected = "c"
+productSelected = "a"
 
 name = productSelected
 price = products[productSelected][0]
