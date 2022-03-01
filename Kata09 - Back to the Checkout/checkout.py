@@ -15,35 +15,35 @@ class Product:
         cost = cost + discount
         return cost
 
-def checkout(goods):
-    total = 0
-    #  split characters
-    #  sum the total of the various elements
-    #  for each element
-    #    instantiate object of Product class and get_price the quantity
-    #  total = sum total of prices
-    return total
+def getPrice(good, q1):
+    #  print(f'cost for {q1} * {good.name} = {good.get_price(good.name, q1)}')
+    cost = good.get_price(good.name, q1)
+    return cost
 
 products = {
   "a": [50, 3, -20],
-  "b": [15, 2, -15],
-  "c": [15, 1, 0],
+  "b": [30, 2, -15],
+  "c": [20, 1, 0],
   "d": [15, 1, 0]
 }
 
-# name = input('name:')
-# amount = int(input('digit amount of items'))
-# price = int(input('digit price of items'))
+purchased = "DABABA".lower()
+total = 0
+qty = [0] * len(products)
 
-productSelected = "a"
+for letter in purchased:
+    index = ord(letter) - 96
+    qty[index - 1] += 1
 
-name = productSelected
-price = products[productSelected][0]
-discQty = products[productSelected][1]
-discAmt = products[productSelected][2]
+x = 0
+while x < len(products):
+    productSelected = str(chr(x + 97))
+    name = productSelected
+    price = products[productSelected][0]
+    discQty = products[productSelected][1]
+    discAmt = products[productSelected][2]
+    productSelected = Product(name, price, discQty, discAmt)
+    total = total + getPrice(productSelected, qty[x])
+    x += 1
 
-a = Product(name, price, discQty, discAmt)
-
-# quantity = int(input('digit amount of items to buy'))
-q1 = 16
-print(f'cost for {q1} * {a.name} = {a.get_price(a.name, q1)}')
+print(total)
