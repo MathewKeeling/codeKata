@@ -8,17 +8,15 @@ class Product:
         self.discQty = discQty
         self.discAmt = discAmt
 
-    def get_price(self, name, number_to_be_bought):
+    def get_price(self, number_to_be_bought):
         cost, discount = 0, 0
-        cost = number_to_be_bought * price
         discount = number_to_be_bought // discQty * discAmt
-        cost = cost + discount
+        cost = ( price * number_to_be_bought ) + discount
         return cost
 
-def getPrice(good, q1):
-    #  print(f'cost for {q1} * {good.name} = {good.get_price(good.name, q1)}')
-    cost = good.get_price(good.name, q1)
-    return cost
+def checkout(cart):
+    
+    print("Your total is: ", total)
 
 products = {
   "a": [50, 3, -20],
@@ -27,23 +25,24 @@ products = {
   "d": [15, 1, 0]
 }
 
-purchased = "DABABA".lower()
 total = 0
-qty = [0] * len(products)
+itemQty = [0] * len(products)
+cart = "aaa"
 
-for letter in purchased:
+for letter in cart:
     index = ord(letter) - 96
-    qty[index - 1] += 1
+    itemQty[index - 1] += 1
 
 x = 0
 while x < len(products):
-    productSelected = str(chr(x + 97))
-    name = productSelected
-    price = products[productSelected][0]
-    discQty = products[productSelected][1]
-    discAmt = products[productSelected][2]
+    item = str(chr(x + 97))
+    name = item
+    price = products[item][0]
+    discQty = products[item][1]
+    discAmt = products[item][2]
     productSelected = Product(name, price, discQty, discAmt)
-    total = total + getPrice(productSelected, qty[x])
+    total = total + productSelected.get_price(itemQty[x])
     x += 1
 
-print(total)
+print("Your total is: ", total)
+
