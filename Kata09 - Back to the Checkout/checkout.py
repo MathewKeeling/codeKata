@@ -78,8 +78,3 @@ discounts = []
 for product in products:
     discounts.append(Discount(product))
 
-
-cart = "DABABA"
-
-print("Total cost is: ")
-print(checkout(cart))
