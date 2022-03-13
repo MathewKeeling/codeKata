@@ -19,6 +19,5 @@ class Test_TestIncrementDecrement(unittest.TestCase):
         self.assertEqual(checkout.checkout("AAABBD"), 190)
         self.assertEqual(checkout.checkout("DABABA"), 190)
 
-
 if __name__ == '__main__':
     unittest.main()
