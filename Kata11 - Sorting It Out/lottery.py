@@ -37,14 +37,5 @@ class Tumbler:
         self.balls.pop(selection, None)
         return selection
 
-#  test
-rack = Rack()
-tumbler = Tumbler()
-tumbler.populate()
-for x in range(5):
-    rack.add(tumbler.get_ball())
-rack.displayRack()
-print(rack.rackstate)
-
 
 
