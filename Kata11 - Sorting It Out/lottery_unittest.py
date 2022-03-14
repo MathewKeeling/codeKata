@@ -1,13 +1,15 @@
-import sorting
+import lottery
 import unittest
 import random
+
+#  test broke
 
 class Test(unittest.TestCase):
 
     def test_sortedRack(self):
-        rack = sorting.Rack()
+        rack = lottery.Rack()
 
-        tumbler = sorting.Tumbler()
+        tumbler = lottery.Tumbler()
         tumbler.populate()
 
         self.assertEqual([], rack.balls)
@@ -19,10 +21,10 @@ class Test(unittest.TestCase):
         self.assertEqual([ 20, 40 ], rack.balls)
 
     def test_drawing(self):
-        tumbler = sorting.Tumbler()
+        tumbler = lottery.Tumbler()
         tumbler.populate()
 
-        rack = sorting.Rack()
+        rack = lottery.Rack()
 
         randomInt = random.randint(5, 15)
         for i in range(0, randomInt):
